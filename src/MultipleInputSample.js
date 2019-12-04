@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 function MultipleInputSample() {
     const [inputs, setInputs] = useState({
@@ -7,6 +7,8 @@ function MultipleInputSample() {
     });
 
     const { name, nickname } = inputs;
+
+    const nameInput = useRef();
 
     const onChange = (e) => {
         const { name, value } = e.target;
@@ -25,6 +27,7 @@ function MultipleInputSample() {
             name: '',
             nickname: '',
         });
+        nameInput.current.focus();
     };
 
     return (
@@ -33,6 +36,7 @@ function MultipleInputSample() {
                    placeholder="이름"
                    onChange={onChange}
                    value={name}
+                   ref={nameInput}
             />
             <input name="nickname"
                    placeholder="닉네임"
