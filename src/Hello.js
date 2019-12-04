@@ -9,10 +9,16 @@ function Hello(props) {
 }
 */
 
-function Hello({ color, name }) {
-    return <div style={{
-        color
-    }}>안녕하세요 {name}</div>;
+function Hello({ color, name, isSpecial }) {
+    return (
+        <div style={{
+            color
+        }}>
+            {isSpecial ? <b>*</b> : <b>?</b>}
+            {/*{isSpecial && <b>*</b>}*/}
+            안녕하세요 {name}
+        </div>
+    );
 }
 
 Hello.defaultProps = {
