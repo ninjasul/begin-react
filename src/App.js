@@ -62,15 +62,15 @@ function App() {
   };
 
   return (
-    <>
-      <CreateUser
-         username={username}
-         email={email}
-         onChange={onChange}
-         onCreate={onCreate}
-      />
-      <UserList users={users} />
-    </>
+      <>
+        <CreateUser
+            username={username}
+            email={email}
+            onChange={onChange}
+            onCreate={onCreate}
+        />
+        <UserList users={users} />
+      </>
   );
 }
 
