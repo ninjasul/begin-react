@@ -1,22 +1,37 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
+
+function reducer(state, action) {
+    switch (action.type) {
+        case 'INCREMENT':
+            return state + action.diff;
+        case 'DECREMENT':
+            return state - action.diff;
+        default:
+            throw new Error('Unhandled action');
+    }
+}
 
 function Counter() {
-    const [number, setNumber] = useState(0);
+    const [number, dispatch] = useReducer(reducer, 0);
 
     const onIncrease = () => {
-        //console.log('+1');
-        setNumber(number + 1);
+       dispatch({
+           type: 'INCREMENT',
+           diff: 5
+       })
     };
     const onDecrease = () => {
-        //console.log('-1');
-        setNumber(number - 1);
+        dispatch({
+            type: 'DECREMENT',
+            diff: 5
+        })
     };
 
     return (
         <div>
             <h1>{number}</h1>
-            <button onClick={onIncrease}>+1</button>
-            <button onClick={onDecrease}>-1</button>
+            <button onClick={onIncrease}>+5</button>
+            <button onClick={onDecrease}>-5</button>
         </div>
     )
 }
