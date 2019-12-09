@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-function User({ user, onRemove, onToggle }) {
+const User = React.memo(function User({ user, onRemove, onToggle }) {
     const { username, email, id, active } = user;
 
 /*
@@ -47,7 +47,7 @@ function User({ user, onRemove, onToggle }) {
             <button onClick={() => onRemove(id)}>삭제</button>
         </div>
     );
-}
+});
 
 function UserList( {users, onRemove, onToggle } ) {
     return (
@@ -69,4 +69,13 @@ function UserList( {users, onRemove, onToggle } ) {
     );
 }
 
-export default UserList;
+
+// 두번째 인자는 리렌더링을 방지를 위한 비교 구문임.
+// true이면 리렌더링을 수행하지 않음.
+// 즉, 이전 props와 다음 props 의 users가 같으면 리렌더링 하지 않음.
+// onRemove, onToggle에서는 함수형 setter를 사용함으로써
+// users에 대한 의존관계를 끊었기 때문에 비교할 필요 조차 없음.
+export default React.memo(
+    UserList,
+    (prevProps, nextProps) => nextProps.users === prevProps.users
+);

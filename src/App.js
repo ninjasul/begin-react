@@ -58,7 +58,7 @@ function App() {
     // 배열에 추가할 경우에는 스프레드 연산자(...)나 concat을 사용해야 함.
     // push, splice는 사용하면 안됨.
     //setUsers([...users, user]);
-    setUsers(users.concat(user));
+    setUsers(users => users.concat(user));
 
     setInputs({
       username: '',
@@ -67,19 +67,19 @@ function App() {
 
     console.log(nextId.current);
     nextId.current += 1;
-  }, [username, email, users]);
+  }, [username, email]);
 
   const onRemove = useCallback(id => {
-    setUsers(users.filter(user => user.id !== id));
-  }, [users]);
+    setUsers(users => users.filter(user => user.id !== id));
+  }, []);
 
   const onToggle = useCallback(id => {
-    setUsers(users.map(
+    setUsers(users => users.map(
         user => user.id === id
         ? { ...user, active: !user.active }
         : user
     ));
-  }, [users]);
+  }, []);
 
   // input 값이 바뀌었을 때 매번 countActiveUsers 함수를 호출해 주지 말고
   // users가 바뀌었을 때만 countActiveUsers 함수를 호출 해 줘야 함.
